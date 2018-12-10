@@ -66,7 +66,10 @@ INSTALLED_APPS = [
     'accounts',
     'asitis',
     'notice_spider',
+    'django_apscheduler',
 ]
+
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"  # Default
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
