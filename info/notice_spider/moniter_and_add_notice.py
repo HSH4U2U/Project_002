@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
+from .send_message import send_email
+from .models import Notice
 
 
 # 올라온 공지 데이터 얻고 tag 분류하는 함수
@@ -25,6 +27,7 @@ def get_notice(sort_of_notice, page):
     new_notice = {
         "seq": page,
         "sort_of_notice": sort_of_notice,
+        "sort": sort,
         "title": title,
         "url": url,
         "tags": include_tags
@@ -32,19 +35,27 @@ def get_notice(sort_of_notice, page):
     return new_notice
 
 
-# TODO: 얻은 new_notice 데이터를 모델에 저장
-notice_list = []  # 이게 모델임
+# 얻은 new_notice 데이터를 모델에 저장하고, email 로 그 내용 보내기
+def add_send_notice(new_notice):
+    # Notice 모델에 새로운 object 로 저장
+    notice = Notice(
+        seq=new_notice["seq"],
+        sort=new_notice["sort"],
+        title=new_notice["title"],
+        url=new_notice["url"],
+        tags=str(new_notice["tags"])
+    )
+    notice.save()
+    print("new save")
 
-
-def add_notice(new_notice):
-    # 해당 공지가 모델에 없는지 확인
-    if not new_notice in notice_list:
-        # TODO: 원래는 모델 써서 새로운 object 로 저장
-        notice_list.append(new_notice)
+    # TODO: 여기에 해당 tag 가지고 있는 user 의 mail 주소 를 모델에서 가져오는 작업 수행
+    title = new_notice["title"]
+    message = new_notice["url"]
+    send_email(title, message, ['hsh700788@naver.com'])
 
 
 # 공지 올라왔는 지 확인하고 올라왔으면 모델에 데이터 저장하는 함수
-def monitor_and_add_notice(sort_of_notice, max_notice_seq):
+def monitor_and_add_send_notice(sort_of_notice, max_notice_seq):
     url = sort_of_notice['list']
     source_code = requests.get(url)
     plain_text = source_code.text
@@ -63,13 +74,8 @@ def monitor_and_add_notice(sort_of_notice, max_notice_seq):
     if new_notice_seq in seqs:
         max_notice_seq = new_notice_seq
         new_notice = get_notice(sort_of_notice, max_notice_seq)
-        add_notice(new_notice)
-
-        # TODO: 여기에 해당 tag 가지고 있는 user 의 receiver_uid 를 모델에서 가져오는 작업 수행
-        message = str(new_notice["tags"]) + str(new_notice["title"]) + "/n" + str(new_notice["url"])
-        # TODO: 여기에 페메 보내기 함수 넣기(param 은 message 와 receiver_uid)
-
-        monitor_and_add_notice(sort_of_notice, max_notice_seq)
+        add_send_notice(new_notice)
+        monitor_and_add_send_notice(sort_of_notice, max_notice_seq)
     # 다음 공지가 지워졌을 수도 있으니 +4개까지 공지 확인
     else:
         i = 2
@@ -78,16 +84,7 @@ def monitor_and_add_notice(sort_of_notice, max_notice_seq):
             if certificate_seq in seqs:
                 max_notice_seq = certificate_seq
                 new_notice = get_notice(sort_of_notice, max_notice_seq)
-                add_notice(new_notice)
-
-                # TODO: 여기에 해당 tag 가지고 있는 user 의 receiver_uid 를 모델에서 가져오는 작업 수행
-                message = str(new_notice["tags"]) + str(new_notice["title"]) + "/n" + str(new_notice["url"])
-                # TODO: 여기에 페메 보내기 함수 넣기(param 은 message 와 receiver_uid)
-
-                monitor_and_add_notice(sort_of_notice, max_notice_seq)
+                add_send_notice(new_notice)
+                monitor_and_add_send_notice(sort_of_notice, max_notice_seq)
                 break
             i += 1
-
-
-monitor_and_add_notice(common_notice, 20464)
-print(notice_list)

@@ -1,4 +1,5 @@
 import os, json
+from django.core.mail import send_mail
 from django.core.exceptions import ImproperlyConfigured
 import fbchat
 from fbchat import Client
@@ -19,8 +20,19 @@ def get_secret(setting, secrets=secrets):
         raise ImproperlyConfigured(error_msg)
 
 
-def send_message(message, receiver_uid):
-    FB_ID = get_secret("FB_ID")
-    FB_PW = get_secret("FB_PW")
-    client = Client(FB_ID, FB_PW, max_tries=2)
-    client.send(fbchat.models.Message(message), receiver_uid)
+# 페메 보내기
+# FB_ID = get_secret("FB_ID")
+# FB_PW = get_secret("FB_PW")
+# client = Client(FB_ID, FB_PW, max_tries=2)
+
+
+# def send_fb_message(message, receiver_uid):
+#     client.send(fbchat.models.Message(message), receiver_uid)
+
+
+# email 보내기
+EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
+
+
+def send_email(title, message, receiver_list):
+    send_mail(title, message, EMAIL_HOST_USER, receiver_list, fail_silently=False)
