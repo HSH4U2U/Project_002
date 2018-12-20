@@ -234,3 +234,7 @@ venv.bak/
 # Secret Key
 secrets.json
 createsu.py
+
+# DATABASE
+*.csv
+class_list

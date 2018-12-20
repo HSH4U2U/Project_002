@@ -1,7 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
-from .send_message import send_email
+from .send_message import send_email, send_telegram
 from .models import Notice
+import ast
+from accounts.models import Profile
 
 
 # 올라온 공지 데이터 얻고 tag 분류하는 함수
@@ -10,11 +12,15 @@ def get_notice(sort_of_notice, page):
     source_code = requests.get(url)
     plain_text = source_code.text
     soup = BeautifulSoup(plain_text, 'html.parser')
-    title = soup.find('title').text.split('<')[0]
-    sort = soup.find('title').text.split('<')[1]
+    title = soup.find('title').text.split('<')[0].strip()
+    sort = soup.find('title').text.split('<')[1].strip()
     content = soup.findAll("li", {"id": "view_content"})[0].text
     # TODO: (tag 값 받아오는 거 해야함)tag 해당하는 것 있으면 tags 필드에 넣기
-    all_tags = ['아버지 합창단', '스카우터 11기 최종 합격자 발표']
+    all_tags = [
+        '해외', '영어', '교환학생', '교환 학생', '창업', '대회', '상금',
+        '시험', '전자전기컴퓨터', '전전컴', '인턴', '서울메이트', '서울 메이트'
+        '버디'
+        ]
     include_tags = []
     for tag in all_tags:
         if content:
@@ -48,10 +54,25 @@ def add_send_notice(new_notice):
     notice.save()
     print("new save")
 
-    # TODO: 여기에 해당 tag 가지고 있는 user 의 mail 주소 를 모델에서 가져오는 작업 수행
     title = new_notice["title"]
     message = new_notice["url"]
-    send_email(title, message, ['hsh700788@naver.com'])
+    tags = new_notice["tags"]
+    # TODO: 여기에 해당 tag 가지고 있는 user 의 mail 주소 를 모델에서 가져오는 작업 수행
+    receiver = []
+    users = Profile.objects.all()
+    for user in users:
+        print(user.my_tags)
+    # for tag in tags:
+    #     for user in users:
+    #         if tag in ast.literal_eval(user.my_tags) & user not in receiver:
+    #             receiver.append(user)
+    #             if user.email:
+    #                 send_email(title, message, [user.email])
+    #             if user.telegram_id:
+    #                 send_telegram(title, message, user.telegram_id)
+    # send_email(title, message, ['hsh700788@naver.com'])
+    # send_telegram(title, message, "717570699")
+    # print("send message")
 
 
 # 공지 올라왔는 지 확인하고 올라왔으면 모델에 데이터 저장하는 함수

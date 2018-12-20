@@ -1,8 +1,9 @@
 import os, json
 from django.core.mail import send_mail
 from django.core.exceptions import ImproperlyConfigured
-import fbchat
-from fbchat import Client
+import telegram
+# import fbchat
+# from fbchat import Client
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -36,3 +37,13 @@ EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
 
 def send_email(title, message, receiver_list):
     send_mail(title, message, EMAIL_HOST_USER, receiver_list, fail_silently=False)
+
+
+# telegram 보내기
+TELEGRAM_TOKEN = get_secret("TELEGRAM_TOKEN")
+bot = telegram.Bot(token=TELEGRAM_TOKEN)
+
+
+def send_telegram(title, message, chat_id):
+    text = str(title) + "\n" + str(message)
+    bot.sendMessage(chat_id=chat_id, text=text)

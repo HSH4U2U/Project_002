@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 
 
 def validate_school_email(value):
-    if not "@uos.ac.kr" in value:
+    if "@uos.ac.kr" not in value:
         raise forms.ValidationError("서울시립대학교 이메일 형식만 아이디로 사용가능합니다.")
     else:
         return value
