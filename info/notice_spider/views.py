@@ -23,8 +23,8 @@ employment_notice = {
 }
 notices = [common_notice, bachelor_notice, employment_notice]
 
-scheduler = BackgroundScheduler()
-scheduler.add_jobstore(DjangoJobStore(), "default")
+# scheduler = BackgroundScheduler()
+# scheduler.add_jobstore(DjangoJobStore(), "default")
 
 
 # 10분마다 전체 함수 실행

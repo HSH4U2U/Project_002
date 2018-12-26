@@ -10,6 +10,7 @@ all_classes = os.path.join(BASE_DIR, './asitis/all_classes.csv')
 def importing_class_list():
     f = open(all_classes, 'r', encoding='utf-8-sig')
     lines = csv.reader(f)
+    i = 1
     for line in lines:
         class_info = line[0].split()
         if "\ufeff" in class_info[0]:
@@ -33,6 +34,7 @@ def importing_class_list():
                 code=class_info[5],
                 department=class_info[1],
                 major=class_info[2],
+                course=class_info[4],
                 grade=class_info[3],
                 semester=class_info[0]
             )
@@ -44,6 +46,7 @@ def importing_class_list():
                 code=class_info[5],
                 department=class_info[1],
                 major=class_info[2],
+                course=class_info[4],
                 grade=class_info[3],
                 semester=class_info[0]
             )
@@ -58,6 +61,7 @@ def importing_class_list():
                     break
         if j == 0:
             new_subject.save()
-        print(len(subjects) + 1)
+        print(str(i) + "-" + str(len(subjects) + 1))
+        i += 1
     print("done")
     f.close()

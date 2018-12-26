@@ -9,6 +9,7 @@ class Subject(models.Model):
     code = models.CharField(max_length=8, verbose_name='과목코드',)
     department = models.CharField(max_length=16, verbose_name='소속 대학명',)
     major = models.CharField(max_length=16, verbose_name='전공',)
+    course = models.CharField(max_length=8, verbose_name='교양/전공 여부',)
     grade = models.CharField(max_length=8, verbose_name='수강 학년',)
     semester = models.TextField(verbose_name='학기',)
 
