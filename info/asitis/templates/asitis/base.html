@@ -12,9 +12,13 @@
 <body>
 <!--header-->
 <div id="header">
-  <div id="menu">0</div>
+  <div id="menu">
+    <img src="{% static 'asitis/images/menu2.png' %}" width="25">
+  </div>
   <a href="{% url "asitis:base" %}" id="title"><p>그대로<br/>나왔네</p></a>
-  <div id="book_mark">0</div>
+  <div id="book_mark">
+    <img src="{% static 'asitis/images/star1.png' %}" width="25">
+  </div>
 </div>
 
 <!--select_bar-->
@@ -31,9 +35,9 @@
       <input id="search" type="text" name="search" placeholder="강의명, 교수명" required>
       <input id="select" type="hidden" name="select">
     </form>
-  </div>
-  <div id="search_btn">
-    <div>검색</div>
+    <div style="display: none" id="search_btn">
+      <img src="{% static 'asitis/images/search.png' %}" height="18">
+    </div>
   </div>
 </div>
 {% endblock %}
