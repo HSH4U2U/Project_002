@@ -51,7 +51,7 @@ input[type="text"], input[type="password"], textarea, select {
 #header {
   display: flex;
   height: 10%;
-  padding: 0 5%;
+  padding: 0 calc(5% - 3px);
   border: black 3px solid;
   justify-content: space-between;
   align-items: center;
