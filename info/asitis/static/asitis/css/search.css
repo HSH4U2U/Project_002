@@ -1,0 +1,46 @@
+/*search_box*/
+#search_box {
+  height: 7%;
+}
+
+#search_bar {
+  height: 100%;
+}
+
+/*class_list*/
+#class_list {
+  height: 74.5%;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+#class_box {
+  display: flex;
+  height: 59px;
+  padding: 0 5%;
+  border-bottom: black 1px solid;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.class_box_contents {
+  font-size: 12px;
+  word-spacing: -4px;
+}
+
+#class_box_left {
+  width: 75%;
+}
+
+#class_box_name {
+  margin-bottom: 3%;
+  color: #0000CC;
+}
+
+#class_box_right {
+  width: 25%;
+}
+
+#class_box_right > img {
+  float: right;
+}

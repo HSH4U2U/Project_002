@@ -1,0 +1,130 @@
+html, body {
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+  font-family: 'Nanum Gothic', sans-serif;
+  background: white;
+  color: #303030;
+  font-weight: 900;
+}
+
+a {
+  text-decoration: none;
+  color: #303030;
+}
+
+input {
+  all: unset;
+  padding: 0;
+}
+
+input[type="text"], input[type="password"], textarea, select {
+    outline: none;
+}
+
+/*scroll design*/
+/* width */
+::-webkit-scrollbar {
+    width: 0;
+    height: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgb(252, 252, 252);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #999;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+
+/*header*/
+#header {
+  display: flex;
+  height: 10%;
+  padding: 0 calc(5% - 3px);
+  border: black 3px solid;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#menu {}
+
+#title {}
+
+
+/*select_bar*/
+#select_box {
+  height: 7%;
+  display: flex;
+  align-items: center;
+  font-size: 95%;
+}
+
+.select_bar {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: black 1px solid;
+}
+
+#select_search {
+  border-left: none;
+}
+
+.black {
+  background-color: black;
+  color: white;
+}
+
+
+/*search_box*/
+#search_box {
+  width: 100%;
+  height: 14%;
+}
+
+#search_bar {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  height: 50%;
+  padding: 0 5%;
+  background-color: black;
+}
+
+#search_form {
+  width: 100%;
+  height: 70%;
+  text-align: center;
+}
+
+#search {
+  width: 92%;
+  height: 100%;
+  padding: 0 4%;
+  background-color: white;
+  font-size: 90%;
+  font-weight: 500;
+}
+
+#search_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*footer*/
+#footer {}

@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>그대로 나왔네</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'asitis/css/base.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+</head>
+<body>
+<!--header-->
+<div id="header">
+  <div id="menu">
+    <img src="{% static 'asitis/images/menu2.png' %}" width="25">
+  </div>
+  <a href="{% url "asitis:base" %}" id="title"><p>그대로<br/>나왔네</p></a>
+  <div id="book_mark">
+    <img src="{% static 'asitis/images/star1.png' %}" width="25">
+  </div>
+</div>
+
+<!--select_bar-->
+<div id="select_box">
+  <div id="select_register" class="select_bar">족보를 등록합니다</div>
+  <div id="select_search" class="select_bar">족보를 검색합니다</div>
+</div>
+
+{% block main %}
+<!--search_box-->
+<div style="display: none" id="search_box">
+  <div id="search_bar">
+    <form method="get" action="" id="search_form">
+      <input id="search" type="text" name="search" placeholder="강의명, 교수명" required>
+      <input id="select" type="hidden" name="select">
+    </form>
+    <div style="display: none" id="search_btn">
+      <img src="{% static 'asitis/images/search.png' %}" height="18">
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+<!--footer-->
+<div id="footer">
+
+</div>
+
+
+
+</body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="{% static 'asitis/js/base.js' %}"></script>
+  {% block script %}
+  {% endblock %}
+</html>
