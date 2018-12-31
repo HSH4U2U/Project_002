@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.urls import path
 from . import views
 from django.conf import settings
@@ -12,3 +13,19 @@ urlpatterns = [
     # path('restaurant/<int:pk>/write_comment', views.write_comment, name="write_comment"),
     # path('like', views.comment_like, name='comment_like'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+=======
+from django.urls import path
+from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
+app_name = "notice_spider"
+
+urlpatterns = [
+    # path('', views.base, name="base"),
+    # path('restaurant/<int:pk>', views.restaurant, name="restaurant"),
+    # path('all_comments', views.all_comments, name="all_comments"),
+    # path('restaurant/<int:pk>/write_comment', views.write_comment, name="write_comment"),
+    # path('like', views.comment_like, name='comment_like'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+>>>>>>> bfc488ad51715cf21e4e02fbe4765263f013a6aa

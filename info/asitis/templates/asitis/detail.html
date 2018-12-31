@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "asitis/base.html" %}
 
 {% block main %}
@@ -35,4 +36,41 @@ if (select === "register") {
     $('#select_search').addClass('black');
 };
 </script>
+=======
+{% extends "asitis/base.html" %}
+
+{% block main %}
+{% load static %}
+<!--search_box-->
+<link rel="stylesheet" type="text/css" href="{% static 'asitis/css/search.css' %}">
+<div id="search_box">
+  <div id="search_bar">
+    <form method="get" action="" id="search_form">
+      <input id="search" type="text" name="search" placeholder="강의명, 교수명" value="{{ search_term }}" required>
+      <input id="select" type="hidden" name="select">
+    </form>
+    <div style="display: none" id="search_btn">
+      <img src="{% static 'asitis/images/search.png' %}" height="18">
+    </div>
+  </div>
+</div>
+
+<!--detail-->
+
+
+{% endblock %}
+
+
+{% block script %}
+<script type="text/javascript" src="{% static 'asitis/js/search.js' %}"></script>
+<script>
+var select = "{{ select }}";
+
+if (select === "register") {
+    $('#select_register').addClass('black');
+} else {
+    $('#select_search').addClass('black');
+};
+</script>
+>>>>>>> bfc488ad51715cf21e4e02fbe4765263f013a6aa
 {% endblock %}
