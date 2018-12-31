@@ -8,9 +8,7 @@ app_name = "asitis"
 
 urlpatterns = [
     path('', views.base, name="base"),
-    # path('restaurant/<int:pk>', views.restaurant, name="restaurant"),
-    # path('all_comments', views.all_comments, name="all_comments"),
-    # path('restaurant/<int:pk>/write_comment', views.write_comment, name="write_comment"),
+    path('detail/<int:pk>', views.detail, name="detail"),
     # path('like', views.comment_like, name='comment_like'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 =======
